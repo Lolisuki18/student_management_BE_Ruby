@@ -1,0 +1,79 @@
+# Student Management API Tests
+# Sử dụng REST Client extension để test các endpoint
+
+### Thiết lập biến
+@baseUrl = http://localhost:3000
+@contentType = application/json
+
+### 1. Test GET all students
+GET {{baseUrl}}/api/v1/students
+Content-Type: {{contentType}}
+
+###
+
+### 2. Test GET student by ID (thay đổi ID theo dữ liệu thực tế)
+GET {{baseUrl}}/api/v1/students/1
+Content-Type: {{contentType}}
+
+###
+
+### 3. Test POST - Tạo student mới
+POST {{baseUrl}}/api/v1/students
+Content-Type: {{contentType}}
+
+{
+  "student": {
+    "full_name": "Nguyen Van A",
+    "student_code": "SV002",
+    "major": "Computer Science",
+    "class_study": "CS101",
+    "academy_year": "2024-2025",
+    "birthday": "2000-01-01",
+    "user_id": 2,
+    "status_id": 1
+  }
+}
+
+###
+
+### 4. Test PUT - Cập nhật student (thay đổi ID theo dữ liệu thực tế)
+PUT {{baseUrl}}/api/v1/students/1
+Content-Type: {{contentType}}
+
+{
+  "student": {
+    "full_name": "Nguyen Van A Updated",
+    "student_code": "SV006",
+    "major": "Information Technology",
+    "class_study": "IT101",
+    "academy_year": "2024-2025",
+    "birthday": "2000-01-01"
+  }
+}
+
+###
+
+### 5. Test DELETE student (thay đổi ID theo dữ liệu thực tế)
+DELETE {{baseUrl}}/api/v1/students/22
+Content-Type: {{contentType}}
+
+###
+
+### 6. Test Authentication (nếu có JWT)
+# Đầu tiên login để lấy token
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: {{contentType}}
+
+{
+  "email": "admin@example.com",
+  "password": "password"
+}
+
+###
+
+### 7. Test với Authorization header (sử dụng token từ response trên)
+GET {{baseUrl}}/api/v1/students
+Content-Type: {{contentType}}
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+###
